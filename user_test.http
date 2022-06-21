@@ -2,7 +2,7 @@ POST http://localhost:8001/user
 content-type: application/json
 
 {
-    "id":1,
+    "id":2,
     "name": "Deybson",
     "lastName":"Ferreira"
 }
@@ -23,4 +23,4 @@ content-type: application/json
 }
 
 ###
-DELETE  http://localhost:8001/user/1
+DELETE  http://localhost:8001/user/2

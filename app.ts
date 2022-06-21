@@ -2,11 +2,24 @@ import { HttpStatusCode } from "./models/httpStatusCode";
 import { UserModel } from "./models/user";
 
 const express = require("express");
+const fs = require("fs");
+
 const app = express();
+/*****variables */
+var userPath = `data/user.json`;
 
 app.use(express.json());
 
 var allUsers: UserModel[] = [];
+
+fs.readFile(userPath, "utf-8", (error: any, data: any) => {
+  if (error) {
+    console.log("Error:", error);
+    allUsers = [];
+  } else {
+    allUsers = JSON.parse(data);
+  }
+});
 
 app.post("/user", (request: any, response: any) => {
   const userBody = request.body as UserModel;
@@ -21,7 +34,9 @@ app.post("/user", (request: any, response: any) => {
     response.status(HttpStatusCode.BadRequest);
     return response.json("usuário com este {id} já existe");
   }
+
   allUsers.push(userBody);
+  CreateUserFile(allUsers);
 });
 
 app.get("/user", (_request: any, response: any) => {
@@ -53,6 +68,8 @@ app.put("/user/:id", (request: any, response: any) => {
       name: userBody.name,
       lastName: userBody.lastName,
     };
+
+    CreateUserFile(allUsers);
     return response.json("Usuário alterado com sucesso");
   } else {
     response.status(HttpStatusCode.NotFound);
@@ -67,12 +84,25 @@ app.delete("/user/:id", (request: any, response: any) => {
 
   if (userIndex >= 0) {
     allUsers.splice(userIndex, 1);
+    CreateUserFile(allUsers);
     return response.json("Usuário deletado com sucesso");
   } else {
     response.status(HttpStatusCode.NotFound);
     return response.json("usuário não encontrado");
   }
 });
+
+//adicionar no arquivo json
+function CreateUserFile(allUsers: UserModel[]) {
+  if (allUsers) {
+    let jsonFile = JSON.stringify(allUsers);
+    fs.writeFile(userPath, jsonFile, (error: any) => {
+      if (error) {
+        console.log("Error:", error);
+      }
+    });
+  }
+}
 
 app.listen(8001, () => {
   console.log("Servidor executando na porta 8001");
