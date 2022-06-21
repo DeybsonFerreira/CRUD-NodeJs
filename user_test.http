@@ -1,0 +1,26 @@
+POST http://localhost:8001/user
+content-type: application/json
+
+{
+    "id":1,
+    "name": "Deybson",
+    "lastName":"Ferreira"
+}
+
+### 
+GET http://localhost:8001/user
+
+###
+GET http://localhost:8001/user/1
+
+###
+PUT  http://localhost:8001/user/1
+content-type: application/json
+
+{
+    "name": "Davi",
+    "lastName":"Ferreira"
+}
+
+###
+DELETE  http://localhost:8001/user/1

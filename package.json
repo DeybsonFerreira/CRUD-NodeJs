@@ -1,0 +1,18 @@
+{
+  "name": "crud-project",
+  "version": "1.0.0",
+  "description": "example project",
+  "main": "index.js",
+  "scripts": {
+    "app": "nodemon app.ts"
+  },
+  "author": "deybson ferreira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  }
+}
