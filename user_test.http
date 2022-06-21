@@ -2,13 +2,13 @@ POST http://localhost:8001/user
 content-type: application/json
 
 {
-    "id":2,
+    "id":1,
     "name": "Deybson",
     "lastName":"Ferreira"
 }
 
 ### 
-GET http://localhost:8001/user
+GET http://localhost:8001/user/
 
 ###
 GET http://localhost:8001/user/1
